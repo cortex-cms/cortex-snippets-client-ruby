@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['ContentEnablementProductTeam@careerbuilder.com']
   spec.license       = 'Apache-2.0'
 
-  spec.summary       = %q{Provides loading of Cortex snippets for Rails and Sinatra applications}
+  spec.summary       = %q{Provides loading of Cortex snippets for Ruby applications, with some Rails ViewHelpers}
   spec.homepage      = 'https://github.com/cortex-cms/cortex-snippets-client-ruby'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
