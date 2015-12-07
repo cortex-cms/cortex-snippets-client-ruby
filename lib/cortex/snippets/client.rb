@@ -1,3 +1,6 @@
+require 'cortex-client'
+require 'connection_pool'
+
 module Cortex
   module Snippets
     module Client
