@@ -2,6 +2,8 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'cortex/snippets/version'
+require 'cortex-client'
+require 'connection_pool'
 
 Gem::Specification.new do |spec|
   spec.name          = 'cortex-snippets-client-ruby'
@@ -18,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'cortex-client', '~> 0.4.3'
+  spec.add_dependency 'cortex-client', '~> 0.4.5'
   spec.add_dependency 'connection_pool', '~> 2.2.0'
 
   spec.add_development_dependency 'bundler', '~> 1.10'

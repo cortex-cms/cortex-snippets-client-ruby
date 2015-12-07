@@ -1,40 +1,52 @@
 module Cortex
   module Snippets
     module ViewHelpers
-      def snippet(id)
-        content_tag(:snippet, Client::current_webpage[:snippets].find { |snippet| snippet.name == id }, id: id)
+      def snippet(options = {}, &block)
+        snippet = webpage[:snippets].find { |snippet| snippet.name == options[:id] }
+
+        if snippet.empty?
+          content_tag(:snippet, capture(&block), id: options[:id])
+        else
+          content_tag(:snippet, snippet, id: options[:id])
+        end
       end
 
       def seo_title
-        Client::current_webpage[:seo_title]
+        webpage[:seo_title]
       end
 
       def seo_description
-        Client::current_webpage[:seo_description]
+        webpage[:seo_description]
       end
 
       def noindex
-        Client::current_webpage[:noindex]
+        webpage[:noindex]
       end
 
       def nofollow
-        Client::current_webpage[:nofollow]
+        webpage[:nofollow]
       end
 
       def noodp
-        Client::current_webpage[:noodp]
+        webpage[:noodp]
       end
 
       def nosnippet
-        Client::current_webpage[:nosnippet]
+        webpage[:nosnippet]
       end
 
       def noarchive
-        Client::current_webpage[:noarchive]
+        webpage[:noarchive]
       end
 
       def noimageindex
-        Client::current_webpage[:noimageindex]
+        webpage[:noimageindex]
+      end
+
+      private
+
+      def webpage
+        Client::current_webpage(request)
       end
     end
   end
