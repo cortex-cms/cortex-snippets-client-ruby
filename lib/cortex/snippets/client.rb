@@ -1,31 +1,31 @@
 module Cortex
   module Snippets
-    class Client
-      attr_accessor :current_webpage
-
-      def initialize(hasharg)
-        if hasharg.has_key? :access_token
-          @cortex_client = ConnectionPool::Wrapper.new(size: 5, timeout: 3) { Cortex::Client.new(access_token: hasharg[:access_token]) }
-        else
-          @cortex_client = ConnectionPool::Wrapper.new(size: 5, timeout: 3) { Cortex::Client.new(key: hasharg[:key], secret: hasharg[:secret], base_url: hasharg[:base_url]) }
-        end
-      end
-
-      def current_webpage
-        if defined?(Rails)
-          Rails.cache.fetch("webpages/#{request_url}", expires_in: 30.minutes) do
-            @cortex_client.webpages.get_feed(request_url)
+    module Client
+      class << self
+        def cortex_client
+          if ENV['CORTEX_SNIPPET_ACCESS_TOKEN'].nil? || ENV['CORTEX_SNIPPET_ACCESS_TOKEN'].empty?
+            @cortex_client ||= ConnectionPool::Wrapper.new(size: 5, timeout: 3) { Cortex::Client.new(access_token: ENV['CORTEX_SNIPPET_ACCESS_TOKEN']) }
+          else
+            @cortex_client ||= ConnectionPool::Wrapper.new(size: 5, timeout: 3) { Cortex::Client.new(key: ENV['CORTEX_SNIPPET_KEY'], secret: ENV['CORTEX_SNIPPET_SECRET'], base_url: ENV['CORTEX_SNIPPET_BASE_URL']) }
           end
-        else
-          raise 'Your Web framework is not supported. Supported frameworks: Rails'
         end
-      end
 
-      private
+        def current_webpage(request)
+          if defined?(Rails)
+            Rails.cache.fetch("webpages/#{request_url(request)}", expires_in: 30.minutes) do
+              cortex_client.webpages.get_feed(request_url(request))
+            end
+          else
+            raise 'Your Web framework is not supported. Supported frameworks: Rails'
+          end
+        end
 
-      def request_url
-        # TODO: Should be turbo-easy to grab request URL from Rack, but this is fine for now
-        request.original_url
+        private
+
+        def request_url(request)
+          # TODO: Should be grabbing request URL in a framework-agnostic manner, but this is fine for now
+          request.original_url
+        end
       end
     end
   end
