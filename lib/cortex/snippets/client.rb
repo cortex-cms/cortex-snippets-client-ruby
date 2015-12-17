@@ -7,16 +7,16 @@ module Cortex
       class << self
         def cortex_client
           if ENV['CORTEX_SNIPPET_ACCESS_TOKEN'].nil? || ENV['CORTEX_SNIPPET_ACCESS_TOKEN'].empty?
-            @cortex_client ||= ConnectionPool::Wrapper.new(size: 5, timeout: 3) { Cortex::Client.new(access_token: ENV['CORTEX_SNIPPET_ACCESS_TOKEN']) }
-          else
             @cortex_client ||= ConnectionPool::Wrapper.new(size: 5, timeout: 3) { Cortex::Client.new(key: ENV['CORTEX_SNIPPET_KEY'], secret: ENV['CORTEX_SNIPPET_SECRET'], base_url: ENV['CORTEX_SNIPPET_BASE_URL']) }
+          else
+            @cortex_client ||= ConnectionPool::Wrapper.new(size: 5, timeout: 3) { Cortex::Client.new(access_token: ENV['CORTEX_SNIPPET_ACCESS_TOKEN']) }
           end
         end
 
         def current_webpage(request)
           if defined?(Rails)
             Rails.cache.fetch("webpages/#{request_url(request)}", expires_in: 30.minutes) do
-              cortex_client.webpages.get_feed(request_url(request))
+              cortex_client.webpages.get_feed(request_url(request)).contents
             end
           else
             raise 'Your Web framework is not supported. Supported frameworks: Rails'

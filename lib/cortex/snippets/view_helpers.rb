@@ -4,7 +4,7 @@ module Cortex
       def snippet(options = {}, &block)
         snippet = webpage[:snippets].find { |snippet| snippet.name == options[:id] }
 
-        if snippet.empty?
+        if snippet.nil? || snippet.empty?
           content_tag(:snippet, capture(&block), id: options[:id])
         else
           content_tag(:snippet, snippet, id: options[:id])
