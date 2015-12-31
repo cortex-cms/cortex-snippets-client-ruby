@@ -1,5 +1,6 @@
 require 'cortex-client'
 require 'connection_pool'
+require 'addressable/template'
 
 module Cortex
   module Snippets
@@ -27,7 +28,9 @@ module Cortex
 
         def request_url(request)
           # TODO: Should be grabbing request URL in a framework-agnostic manner, but this is fine for now
-          request.original_url
+          uri = Addressable::URI.parse(request.original_url)
+
+          "#{uri.scheme}://#{uri.authority}#{uri.path}"
         end
       end
     end
