@@ -29,8 +29,8 @@ module Cortex
         def request_url(request)
           # TODO: Should be grabbing request URL in a framework-agnostic manner, but this is fine for now
           uri = Addressable::URI.parse(request.original_url)
-
-          "#{uri.scheme}://#{uri.authority}#{uri.path}"
+          path = uri.path == "/" ? uri.path : uri.path.chomp("/")
+          "#{uri.scheme}://#{uri.authority}#{path}"
         end
       end
     end
