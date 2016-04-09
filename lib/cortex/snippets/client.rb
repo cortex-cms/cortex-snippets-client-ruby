@@ -8,7 +8,7 @@ module Cortex
       class << self
         def cortex_client
           if ENV['CORTEX_SNIPPET_ACCESS_TOKEN'].nil? || ENV['CORTEX_SNIPPET_ACCESS_TOKEN'].empty?
-            @cortex_client ||= ConnectionPool::Wrapper.new(size: 5, timeout: 3) { Cortex::Client.new(key: ENV['CORTEX_SNIPPET_KEY'], secret: ENV['CORTEX_SNIPPET_SECRET'], base_url: ENV['CORTEX_SNIPPET_BASE_URL']) }
+            @cortex_client ||= ConnectionPool::Wrapper.new(size: 5, timeout: 3) { Cortex::Client.new(key: ENV['CORTEX_SNIPPET_KEY'], secret: ENV['CORTEX_SNIPPET_SECRET'], base_url: ENV['CORTEX_SNIPPET_BASE_URL'], scopes: ENV['CORTEX_SCOPES']) }
           else
             @cortex_client ||= ConnectionPool::Wrapper.new(size: 5, timeout: 3) { Cortex::Client.new(access_token: ENV['CORTEX_SNIPPET_ACCESS_TOKEN']) }
           end
