@@ -15,7 +15,13 @@ module Cortex
         end
 
         def current_webpage(request)
-          cortex_client.webpages.get_feed(request_url(request)).contents
+          if defined?(Rails)
+            Rails.cache.fetch("webpages/#{request_url(request)}", expires_in: 30.minutes) do
+              cortex_client.webpages.get_feed(request_url(request)).contents
+            end
+          else
+            raise 'Your Web framework is not supported. Supported frameworks: Rails'
+          end
         end
 
         private
