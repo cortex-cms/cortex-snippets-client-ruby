@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'cortex/snippets/version'
+require 'cortex/snippets/client/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'cortex-snippets-client-ruby'
-  spec.version       = Cortex::Snippets::VERSION
+  spec.version       = Cortex::Snippets::Client::VERSION
   spec.authors       = ['CB Content Enablement']
   spec.email         = ['ContentEnablementProductTeam@careerbuilder.com']
   spec.license       = 'Apache-2.0'
