@@ -18,7 +18,7 @@ module Cortex
 
         def current_webpage(request)
           if defined?(Rails)
-            Rails.cache.fetch("webpages/#{request_url(request)}", expires_in: 0, race_condition_ttl: 10) do
+            Rails.cache.fetch("webpages/#{request_url(request)}", race_condition_ttl: 10) do
               cortex_client.webpages.get_feed(request_url(request)).contents
             end
           else
@@ -29,7 +29,7 @@ module Cortex
         def request_url(request)
           # TODO: Should be grabbing request URL in a framework-agnostic manner, but this is fine for now
           uri = Addressable::URI.parse(request.original_url)
-          path = uri.path == "/" ? uri.path : uri.path.chomp("/")
+          path = uri.path == '/' ? uri.path : uri.path.chomp('/')
           "#{uri.scheme}://#{uri.authority}#{path}"
         end
       end

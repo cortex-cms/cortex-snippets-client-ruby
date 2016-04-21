@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'cortex/snippets/client/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'cortex-snippets-client-ruby'
+  spec.name          = 'cortex-snippets-client'
   spec.version       = Cortex::Snippets::Client::VERSION
   spec.authors       = ['CB Content Enablement']
   spec.email         = ['ContentEnablementProductTeam@careerbuilder.com']
