@@ -1,3 +1,5 @@
+require 'cortex/snippets/client/helper'
+require 'cortex/snippets/client/railtie' if defined?(Rails)
 require 'cortex-client'
 require 'connection_pool'
 require 'addressable/template'
@@ -16,15 +18,13 @@ module Cortex
 
         def current_webpage(request)
           if defined?(Rails)
-            Rails.cache.fetch("webpages/#{request_url(request)}", expires_in: 30.minutes) do
+            Rails.cache.fetch("webpages/#{request_url(request)}", expires_in: 30.minutes, race_condition_ttl: 10) do
               cortex_client.webpages.get_feed(request_url(request)).contents
             end
           else
             raise 'Your Web framework is not supported. Supported frameworks: Rails'
           end
         end
-
-        private
 
         def request_url(request)
           # TODO: Should be grabbing request URL in a framework-agnostic manner, but this is fine for now
