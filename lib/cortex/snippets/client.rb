@@ -18,17 +18,17 @@ module Cortex
 
         def current_webpage(request)
           if defined?(Rails)
-            Rails.cache.fetch("webpages/#{request_url(request)}", race_condition_ttl: 10) do
-              cortex_client.webpages.get_feed(request_url(request)).contents
+            sanitized_url = sanitized_webpage_url(request.original_url)
+            Rails.cache.fetch("webpages/#{sanitized_url}", race_condition_ttl: 10) do
+              cortex_client.webpages.get_feed(sanitized_url).contents
             end
           else
             raise 'Your Web framework is not supported. Supported frameworks: Rails'
           end
         end
 
-        def request_url(request)
-          # TODO: Should be grabbing request URL in a framework-agnostic manner, but this is fine for now
-          uri = Addressable::URI.parse(request.original_url)
+        def sanitized_webpage_url(url)
+          uri = Addressable::URI.parse(url)
           path = uri.path == '/' ? uri.path : uri.path.chomp('/')
           "#{uri.scheme}://#{uri.authority}#{path}"
         end
