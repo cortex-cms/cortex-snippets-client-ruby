@@ -22,7 +22,7 @@ module Cortex
         end
 
         def seo_keywords
-          webpage[:seo_keyword_list].join(" ")
+          webpage[:seo_keyword_list]
         end
 
         def noindex
