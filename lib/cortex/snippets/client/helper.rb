@@ -25,6 +25,17 @@ module Cortex
           webpage[:seo_keyword_list]
         end
 
+        def seo_robots
+          robot_information = []
+          index_options = [:noindex, :nofollow, :noodp, :nosnippet, :noarchive, :noimageindex]
+
+          index_options.each do |index_option|
+            robot_information << index_option if webpage[index_option]
+          end
+
+          robot_information
+        end
+
         def noindex
           webpage[:noindex]
         end
