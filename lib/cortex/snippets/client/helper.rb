@@ -25,6 +25,10 @@ module Cortex
           webpage[:seo_keyword_list]
         end
 
+        def seo_robots
+          webpage[:seo_robots]
+        end
+
         def noindex
           webpage[:noindex]
         end
