@@ -26,7 +26,14 @@ module Cortex
         end
 
         def seo_robots
-          build_robot_information
+          robot_information = []
+          index_options = [:noindex, :nofollow, :noodp, :nosnippet, :noarchive, :noimageindex]
+
+          index_options.each do |index_option|
+            robot_information << index_option if webpage[index_option]
+          end
+
+          robot_information
         end
 
         def noindex
@@ -57,21 +64,6 @@ module Cortex
 
         def webpage
           Cortex::Snippets::Client::current_webpage(request)
-        end
-
-        def build_robot_information
-          robot_information = []
-          index_options = [:noindex, :nofollow, :noodp, :nosnippet, :noarchive, :noimageindex]
-
-          index_options.each do |index_option|
-            robot_information << index_option if valid_index_option?(index_option)
-          end
-
-          robot_information.join(", ")
-        end
-
-        def valid_index_option?(index_option)
-          webpage[index_option]
         end
       end
     end
