@@ -11,7 +11,7 @@ module Cortex
         def current_webpage(request, cortex_client)
           if defined?(Rails)
             sanitized_url = sanitized_webpage_url(request.original_url)
-            Rails.cache.fetch("webpages/#{sanitized_url}", race_condition_ttl: 10) do
+            Rails.cache.fetch("webpages/#{cortex_client.access_token.client.id}/#{sanitized_url}", race_condition_ttl: 10) do
               cortex_client.webpages.get_feed(sanitized_url).contents
             end
           else
