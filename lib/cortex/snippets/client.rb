@@ -8,15 +8,7 @@ module Cortex
   module Snippets
     module Client
       class << self
-        def cortex_client
-          if ENV['CORTEX_SNIPPET_ACCESS_TOKEN'].nil? || ENV['CORTEX_SNIPPET_ACCESS_TOKEN'].empty?
-            @cortex_client ||= ConnectionPool::Wrapper.new(size: 5, timeout: 3) { Cortex::Client.new(key: ENV['CORTEX_SNIPPET_KEY'], secret: ENV['CORTEX_SNIPPET_SECRET'], base_url: ENV['CORTEX_SNIPPET_BASE_URL'], scopes: ENV['CORTEX_SNIPPET_SCOPES']) }
-          else
-            @cortex_client ||= ConnectionPool::Wrapper.new(size: 5, timeout: 3) { Cortex::Client.new(access_token: ENV['CORTEX_SNIPPET_ACCESS_TOKEN']) }
-          end
-        end
-
-        def current_webpage(request)
+        def current_webpage(request, cortex_client)
           if defined?(Rails)
             sanitized_url = sanitized_webpage_url(request.original_url)
             Rails.cache.fetch("webpages/#{sanitized_url}", race_condition_ttl: 10) do

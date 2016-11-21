@@ -2,11 +2,13 @@ module Cortex
   module Snippets
     module Client
       module Helper
-        def snippet(options = {}, &block)
+        def snippet(client, options = {}, &block)
+          @cortex_client = client
+
           snippets = webpage[:snippets] || []
           snippet = snippets.find { |snippet| snippet[:document][:name] == options[:id] }
 
-          if snippet.nil? || snippet[:document][:body].nil? || snippet[:document][:body].empty?
+          if snippet.nil? || snippet[:document][:body].blank?
             content_tag(:snippet, capture(&block), options)
           else
             content_tag(:snippet, snippet[:document][:body].html_safe, options)
@@ -70,7 +72,7 @@ module Cortex
         private
 
         def webpage
-          Cortex::Snippets::Client::current_webpage(request)
+          Cortex::Snippets::Client::current_webpage(request, @cortex_client)
         end
       end
     end
