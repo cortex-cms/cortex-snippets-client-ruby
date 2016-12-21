@@ -60,6 +60,13 @@ module Cortex
           webpage[:noimageindex]
         end
 
+        def dynamic_yield
+          {
+              sku: webpage[:dynamic_yield_sku],
+              category: webpage[:dynamic_yield_category]
+          }
+        end
+
         private
 
         def webpage
