@@ -3,6 +3,8 @@ Version History
     * All Version bumps are required to update this file as well!!
 ----
 
+* 0.8.0 - Add Dynamic Yield Metadata
+* 0.7.0 - Add SEO Robot Metadata
 * 0.6.0 - Set SEO Keyword feed to be an array rather than comma separated String
 * 0.5.3 - Extract a framework-agnostic sanitized_webpage_url method
 * 0.5.2 - Addendum to previous version: fix expiry issues
