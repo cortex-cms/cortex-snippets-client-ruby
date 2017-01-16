@@ -66,8 +66,8 @@ module Cortex
 
         def dynamic_yield
           {
-              sku: webpage[:dynamic_yield_sku],
-              category: webpage[:dynamic_yield_category]
+            sku: webpage[:dynamic_yield_sku],
+            category: webpage[:dynamic_yield_category]
           }
         end
 
