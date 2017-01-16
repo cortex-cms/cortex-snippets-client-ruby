@@ -1,10 +1,12 @@
 module Cortex
   module Snippets
     module Client
-      module Helper
-        def snippet(client, options = {}, &block)
+      class Accessor
+        def initialize(client)
           @cortex_client = client
+        end
 
+        def snippet(options = {}, &block)
           snippets = webpage[:snippets] || []
           snippet = snippets.find { |snippet| snippet[:document][:name] == options[:id] }
 
