@@ -6,8 +6,8 @@ require 'cortex/snippets/client/version'
 Gem::Specification.new do |spec|
   spec.name          = 'cortex-snippets-client'
   spec.version       = Cortex::Snippets::Client::VERSION
-  spec.authors       = ['CB Content Enablement']
-  spec.email         = ['ContentEnablementProductTeam@careerbuilder.com']
+  spec.authors       = ['CareerBuilder Employer Site & Content Products']
+  spec.email         = ['EmployerSiteContentProducts@cb.com']
   spec.license       = 'Apache-2.0'
 
   spec.summary       = %q{Provides loading of Cortex snippets for Ruby applications, with some Rails ViewHelpers}
@@ -18,11 +18,10 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'cortex-client', '~> 0.8.2'
-  spec.add_dependency 'connection_pool', '~> 2.2.0'
-  spec.add_dependency 'addressable', '~> 2.4.0'
+  spec.add_dependency 'cortex-client', '~> 0.10'
+  spec.add_dependency 'connection_pool', '~> 2.2'
+  spec.add_dependency 'addressable', '~> 2.5'
 
-  spec.add_development_dependency 'rake', '~> 11.1'
-  spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'pry'
+  spec.add_development_dependency 'rake', '~> 12.0'
+  spec.add_development_dependency 'rspec', '~> 3.5'
 end

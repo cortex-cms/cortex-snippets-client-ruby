@@ -3,6 +3,7 @@ Version History
     * All Version bumps are required to update this file as well!!
 ----
 
+* 0.8.1 - Dependency upgrades, etc
 * 0.8.0 - Add Dynamic Yield Metadata
 * 0.7.0 - Add SEO Robot Metadata
 * 0.6.0 - Set SEO Keyword feed to be an array rather than comma separated String
