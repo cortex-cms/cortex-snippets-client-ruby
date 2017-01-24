@@ -4,8 +4,8 @@ module Cortex
   module Snippet
     module Client
       module Helper
-        def snippet(options = {}, &block)
-          snippets = webpage[:snippets] || []
+        def snippet(cortex_client, options = {}, &block)
+          snippets = current_webpage(cortex_client)[:snippets] || []
           snippet = snippets.find { |snippet| snippet[:document][:name] == options[:id] }
 
           if snippet.nil? || snippet[:document][:body].nil? || snippet[:document][:body].empty?
