@@ -15,9 +15,9 @@ module Cortex
           end
         end
 
-        def webpage(cortex_client)
+        def current_webpage(cortex_client)
           if defined?(Rails)
-            Webpage.new(request, cortex_client)
+            Cortex::Snippets::Client::Webpage.new(request, cortex_client)
           else
             raise 'Your Web framework is not supported. Supported frameworks: Rails'
           end
