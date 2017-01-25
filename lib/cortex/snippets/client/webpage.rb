@@ -59,6 +59,10 @@ module Cortex
             category: @webpage[:dynamic_yield_category]
           }
         end
+
+        def snippets
+          @webpage[:snippets]
+        end
       end
     end
   end
