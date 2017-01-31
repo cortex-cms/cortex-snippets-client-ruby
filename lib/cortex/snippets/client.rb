@@ -1,4 +1,4 @@
-require 'cortex/snippets/client/webpage'
+require 'cortex/snippets/webpage'
 require 'addressable/uri'
 
 module Cortex
@@ -9,7 +9,7 @@ module Cortex
       end
 
       def snippet(options = {}, &block)
-        snippets = current_webpage(@cortex_client).snippets || []
+        snippets = current_webpage.snippets || []
         snippet = snippets.find { |snippet| snippet[:document][:name] == options[:id] }
 
         if snippet.nil? || snippet[:document][:body].nil? || snippet[:document][:body].empty?
@@ -23,7 +23,7 @@ module Cortex
         if defined?(Rails)
           url = sanitized_webpage_url(request.original_url)
           Rails.cache.fetch("webpages/#{@cortex_client.access_token.client.id}/#{url}", race_condition_ttl: 10) do
-            Cortex::Snippets::Client::Webpage.new(@cortex_client, url)
+            Cortex::Snippets::Webpage.new(@cortex_client, url)
           end
         else
           raise 'Your Web framework is not supported. Supported frameworks: Rails'
