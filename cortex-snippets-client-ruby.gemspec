@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'cortex/snippets/client/version'
+require 'cortex/snippets/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'cortex-snippets-client'
-  spec.version       = Cortex::Snippets::Client::VERSION
+  spec.version       = Cortex::Snippets::VERSION
   spec.authors       = ['CareerBuilder Employer Site & Content Products']
   spec.email         = ['EmployerSiteContentProducts@cb.com']
   spec.license       = 'Apache-2.0'
@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'cortex-client', '~> 0.10'
-  spec.add_dependency 'addressable', '~> 2.5'
+  spec.add_dependency 'addressable', '~> 2.4'
 
   spec.add_development_dependency 'rake', '~> 12.0'
   spec.add_development_dependency 'rspec', '~> 3.5'
