@@ -3,6 +3,7 @@ Version History
     * All Version bumps are required to update this file as well!!
 ----
 
+* 1.0.0 - Multi-tenancy Rebuild, now takes in Cortex Client
 * 0.8.1 - Dependency upgrades, etc
 * 0.8.0 - Add Dynamic Yield Metadata
 * 0.7.0 - Add SEO Robot Metadata
