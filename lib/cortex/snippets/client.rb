@@ -8,8 +8,8 @@ module Cortex
         @cortex_client = cortex_client
       end
 
-      def snippet(options = {}, &block)
-        snippets = current_webpage.snippets || []
+      def snippet(request, options = {}, &block)
+        snippets = current_webpage(request).snippets || []
         snippet = snippets.find { |snippet| snippet[:document][:name] == options[:id] }
 
         if snippet.nil? || snippet[:document][:body].nil? || snippet[:document][:body].empty?
@@ -19,7 +19,7 @@ module Cortex
         end
       end
 
-      def current_webpage
+      def current_webpage(request)
         if defined?(Rails)
           url = sanitized_webpage_url(request.original_url)
           Rails.cache.fetch("webpages/#{@cortex_client.access_token.client.id}/#{url}", race_condition_ttl: 10) do
