@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'cortex-client', '~> 0.10'
-  spec.add_dependency 'addressable', '~> 2.4'
+  spec.add_dependency 'addressable', '~> 2.5'
 
   spec.add_development_dependency 'rake', '~> 12.0'
   spec.add_development_dependency 'rspec', '~> 3.5'
