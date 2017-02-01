@@ -4,16 +4,18 @@ require 'addressable/uri'
 module Cortex
   module Snippets
     class Client
+      include ActionView::Helpers::TranslationHelper
+
       def initialize(cortex_client)
         @cortex_client = cortex_client
       end
 
-      def snippet(request, options = {}, &block)
+      def snippet(request, options = {}, block)
         snippets = current_webpage(request).snippets || []
         snippet = snippets.find { |snippet| snippet[:document][:name] == options[:id] }
 
         if snippet.nil? || snippet[:document][:body].nil? || snippet[:document][:body].empty?
-          content_tag(:snippet, capture(&block), options)
+          content_tag(:snippet, block, options)
         else
           content_tag(:snippet, snippet[:document][:body].html_safe, options)
         end
