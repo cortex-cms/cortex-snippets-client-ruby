@@ -4,7 +4,7 @@ require 'addressable/uri'
 module Cortex
   module Snippets
     class Client
-      include ActionView::Helpers::TranslationHelper
+      include ActionView::Helpers::TagHelper
 
       def initialize(cortex_client)
         @cortex_client = cortex_client
