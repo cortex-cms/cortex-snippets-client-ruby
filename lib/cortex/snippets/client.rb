@@ -14,7 +14,7 @@ module Cortex
         snippets = current_webpage(request).snippets || []
         snippet = snippets.find { |snippet| snippet[:document][:name] == options[:id] }
 
-        if snippet.nil? || snippet[:document][:body].nil? || snippet[:document][:body].empty?
+        if snippet.nil? || snippet[:document][:body].nil?
           content_tag(:snippet, block, options)
         else
           content_tag(:snippet, snippet[:document][:body].html_safe, options)
