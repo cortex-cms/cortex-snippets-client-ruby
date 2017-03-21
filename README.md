@@ -2,7 +2,7 @@
 
 This is the Ruby Client of the Snippets Library for [Cortex](https://github.com/cortex-cms). The purpose of this gem is to create a simplified way of accessing the content of snippets that are modifiable in the Cortex IPE and rendering them as useable markup, as well as the various other attributes of Webpages.
 
-##Installation
+## Installation
 
 
 To Install simply run
@@ -23,7 +23,7 @@ And then run
 bundle install
 ```
 
-##Setup
+## Setup
 
 
 In order to get started using the Cortex Snippets Client you're going to need to initialize a [Cortex Client](https://github.com/cortex-cms/cortex-client-ruby) object that you will be using to interact with Cortex. You will need a separate client for each tenant you have active.
@@ -44,7 +44,7 @@ Once you have your Cortex Client object you can simply initialize and store a Co
 @cortex_snippet_client = Cortex::Snippets::Client.new($cortex)
 ```
 
-##Usage
+## Usage
 
 
 Use of this gem is generally split into two categories: Snippets and Webpages
@@ -53,7 +53,7 @@ Use of this gem is generally split into two categories: Snippets and Webpages
 
 **Webpages** refer to the created webpages themselves, which have several bits of relevant metadata including, but not limited to: title, keywords, and indexing information. 
 
-###Snippets
+### Snippets
 
 
 **Basic Usage**
@@ -102,7 +102,7 @@ Will result in the following markup being rendered:
 </snippet>
 ```
 
-###Webpages
+### Webpages
 
 The webpage system of this gem is used quite differently, in order to properly reference it you will need to do the following:
 
