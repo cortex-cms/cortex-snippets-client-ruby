@@ -17,7 +17,7 @@ Or if you're installing from a Gemfile include it as
 gem 'cortex-snippets-client`, '~> 1.0.4'
 ```
 
-And then run 
+And then run
 
 ```ruby
 bundle install
@@ -51,7 +51,7 @@ Use of this gem is generally split into two categories: Snippets and Webpages
 
 **Snippets** refers to blocks of markup that are editable in Cortex IPE and, through the use of this gem, persist into the tenant application. This allows the copy changes made in IPE to replace default blocks on the page and your changes to be shown.
 
-**Webpages** refer to the created webpages themselves, which have several bits of relevant metadata including, but not limited to: title, keywords, and indexing information. 
+**Webpages** refer to the created webpages themselves, which have several bits of relevant metadata including, but not limited to: title, keywords, and indexing information.
 
 ### Snippets
 
@@ -125,8 +125,9 @@ This will give you a webpage object from your current Cortex Tenant with all of 
 |noarchive| The noarchive information for the Webpage. Included in `seo_robots`|
 |noimageindex| The noimageindex information for the Webpage. Included in `seo_robots`|
 |dynamic_yield| A hash of Dynamic Yield information from the current Webpage.|
+|tables_widget_data| A hash containing Tables Widget configuration data.|
+|tables_widget_data_for| An array (usually) containing table data for a single section.|
 |snippets|An array of the associated snippets with the current Webpage.|
-
 
 1:<br>
 The resulting array from `seo_keywords` can be entered into a single keyword meta tag like so:
