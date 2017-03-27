@@ -21,6 +21,10 @@ module Cortex
         end
       end
 
+      def page_snippets(request)
+        current_webpage(request).snippets || []
+      end
+
       def current_webpage(request)
         if defined?(Rails)
           url = sanitized_webpage_url(request.original_url)
