@@ -59,6 +59,14 @@ module Cortex
         }
       end
 
+      def tables_widget_data
+        JSON.parse(@webpage[:tables_widget_json] || 'null', quirks_mode: true)
+      end
+
+      def tables_widget_data_for(section_name)
+        tables_widget_data&.[](section_name) || []
+      end
+
       def snippets
         @webpage[:snippets]
       end
