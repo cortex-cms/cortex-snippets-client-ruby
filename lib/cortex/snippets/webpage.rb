@@ -72,7 +72,7 @@ module Cortex
       end
 
       def charts_widget_data_for(section_name)
-        charts_widget_data&.[](section_name) || []
+        charts_widget_data&.[](section_name) || {}
       end
 
       def snippets
