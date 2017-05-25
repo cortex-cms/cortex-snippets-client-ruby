@@ -74,6 +74,14 @@ module Cortex
       def accordion_group_widget_data_for(section_name)
         accordion_group_widget_data&.[](section_name) || []
       end
+        
+      def charts_widget_data
+        JSON.parse(@webpage[:charts_widget_json] || 'null', quirks_mode: true)
+      end
+
+      def charts_widget_data_for(section_name)
+        charts_widget_data&.[](section_name) || {}
+      end
 
       def snippets
         @webpage[:snippets]
