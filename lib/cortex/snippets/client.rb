@@ -21,6 +21,16 @@ module Cortex
         end
       end
 
+      def snippet_content(request, options = {}, content)
+        snippets = current_webpage(request).snippets || []
+        snippet = snippets.find { |snippet| snippet[:document][:name] == options[:id] }
+        if snippet.nil? || snippet[:document][:body].nil?
+          content
+        else
+          snippet[:document][:body].html_safe
+        end
+      end
+
       def current_webpage(request)
         if defined?(Rails)
           url = sanitized_webpage_url(request.original_url)
