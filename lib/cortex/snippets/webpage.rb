@@ -13,6 +13,14 @@ module Cortex
         @webpage[:seo_description]
       end
 
+      def updated_at
+        @webpage[:updated_at]
+      end
+
+      def name
+        @webpage[:name]
+      end
+
       def seo_keywords
         @webpage[:seo_keyword_list]
       end
