@@ -75,6 +75,14 @@ module Cortex
         carousels_widget_data&.[](section_name)
       end
 
+      def galleries_widget_data
+        JSON.parse(@webpage[:galleries_widget_json] || 'null', quirks_mode: true)
+      end
+
+      def galleries_widget_data_for(section_name)
+        galleries_widget_data&.[](section_name)
+      end
+
       def accordion_group_widget_data
         JSON.parse(@webpage[:accordion_group_widget_json] || 'null', quirks_mode: true)
       end
