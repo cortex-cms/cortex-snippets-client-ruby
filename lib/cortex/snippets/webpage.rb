@@ -7,6 +7,10 @@ module Cortex
         @page_cache_key = @webpage.status == 200 ? "root#{path}@#{@contents.updated_at}" : "root#{path}"
       end
 
+      def response
+        @webpage
+      end
+
       def page_cache_key
         @page_cache_key
       end
