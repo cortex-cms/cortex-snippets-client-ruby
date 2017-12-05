@@ -25,7 +25,7 @@ module Cortex
         if defined?(Rails)
           url = sanitized_webpage_url(request.original_url)
           Rails.cache.fetch("webpages/#{@cortex_client.access_token.client.id}/#{url}", race_condition_ttl: 10) do
-            Cortex::Snippets::Webpage.new(@cortex_client, url)
+            Cortex::Snippets::Webpage.new(@cortex_client, url, request.path)
           end
         else
           raise 'Your Web framework is not supported. Supported frameworks: Rails'
