@@ -1,14 +1,18 @@
 module Cortex
   module Snippets
     class Webpage
-      def initialize(cortex_client, url, path)
+      def initialize(cortex_client, url)
         @webpage = cortex_client.webpages.get_feed(url)
         @contents = @webpage.contents
-        @page_cache_key = @webpage.status == 200 ? "root#{path}@#{@contents.updated_at}" : "root#{path}"
+        @page_cache_key = @webpage.status == 200 ? "view:#{url}@#{@contents.updated_at}" : "view:#{url}"
       end
 
       def response
         @webpage
+      end
+
+      def status
+        @webpage.status
       end
 
       def page_cache_key
