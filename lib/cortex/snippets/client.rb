@@ -24,7 +24,8 @@ module Cortex
       def current_webpage(request)
         if defined?(Rails)
           url = sanitized_webpage_url(request.original_url)
-          Rails.cache.fetch("webpages/#{@cortex_client.access_token.client.id}/#{url}", race_condition_ttl: 10) do
+          redis_cache = $redis_cache || Rails.cache
+          redis_cache.fetch("webpages/#{@cortex_client.access_token.client.id}/#{url}", race_condition_ttl: 10) do
             Cortex::Snippets::Webpage.new(@cortex_client, url)
           end
         else
