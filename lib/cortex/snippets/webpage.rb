@@ -1,23 +1,13 @@
 module Cortex
   module Snippets
     class Webpage
+      attr_reader :response, :url, :contents, :status
+
       def initialize(cortex_client, url)
-        @webpage = cortex_client.webpages.get_feed(url)
-        binding.pry
-        @contents = @webpage.contents
-        @page_cache_key = @webpage.status == 200 ? "view:#{url}@#{@contents.updated_at}" : "view:#{url}"
-      end
-
-      def response
-        @webpage
-      end
-
-      def status
-        @webpage.status
-      end
-
-      def page_cache_key
-        @page_cache_key
+        @url = url
+        @response = cortex_client.webpages.get_feed(url)
+        @status = @response.status
+        @contents = @response.contents
       end
 
       def seo_title
