@@ -52,13 +52,6 @@ module Cortex
         @webpage[:noimageindex]
       end
 
-      def dynamic_yield
-        {
-          sku: @webpage[:dynamic_yield_sku],
-          category: @webpage[:dynamic_yield_category]
-        }
-      end
-
       def tables_widget_data
         JSON.parse(@webpage[:tables_widget_json] || 'null', quirks_mode: true)
       end
@@ -101,6 +94,10 @@ module Cortex
 
       def charts_widget_data_for(section_name)
         charts_widget_data&.[](section_name) || {}
+      end
+
+      def product_data
+        JSON.parse(@webpage[:product_data_json] || 'null', quirks_mode: true)
       end
 
       def snippets
