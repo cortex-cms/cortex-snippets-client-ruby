@@ -1,20 +1,25 @@
 module Cortex
   module Snippets
     class Webpage
+      attr_reader :response, :url, :contents, :status
+
       def initialize(cortex_client, url)
-        @webpage = cortex_client.webpages.get_feed(url).contents
+        @url = url
+        @response = cortex_client.webpages.get_feed(url)
+        @status = @response.status
+        @contents = @response.contents
       end
 
       def seo_title
-        @webpage[:seo_title]
+        @contents[:seo_title]
       end
 
       def seo_description
-        @webpage[:seo_description]
+        @contents[:seo_description]
       end
 
       def seo_keywords
-        @webpage[:seo_keyword_list]
+        @contents[:seo_keyword_list]
       end
 
       def seo_robots
@@ -22,38 +27,38 @@ module Cortex
         index_options = [:noindex, :nofollow, :noodp, :nosnippet, :noarchive, :noimageindex]
 
         index_options.each do |index_option|
-          robot_information << index_option if @webpage[index_option]
+          robot_information << index_option if @contents[index_option]
         end
 
         robot_information
       end
 
       def noindex
-        @webpage[:noindex]
+        @contents[:noindex]
       end
 
       def nofollow
-        @webpage[:nofollow]
+        @contents[:nofollow]
       end
 
       def noodp
-        @webpage[:noodp]
+        @contents[:noodp]
       end
 
       def nosnippet
-        @webpage[:nosnippet]
+        @contents[:nosnippet]
       end
 
       def noarchive
-        @webpage[:noarchive]
+        @contents[:noarchive]
       end
 
       def noimageindex
-        @webpage[:noimageindex]
+        @contents[:noimageindex]
       end
-
+      
       def tables_widget_data
-        JSON.parse(@webpage[:tables_widget_json] || 'null', quirks_mode: true)
+        JSON.parse(@contents[:tables_widget_json] || 'null', quirks_mode: true)
       end
 
       def tables_widget_data_for(section_name)
@@ -61,7 +66,7 @@ module Cortex
       end
 
       def carousels_widget_data
-        JSON.parse(@webpage[:carousels_widget_json] || 'null', quirks_mode: true)
+        JSON.parse(@contents[:carousels_widget_json] || 'null', quirks_mode: true)
       end
 
       def carousels_widget_data_for(section_name)
@@ -69,7 +74,7 @@ module Cortex
       end
 
       def galleries_widget_data
-        JSON.parse(@webpage[:galleries_widget_json] || 'null', quirks_mode: true)
+        JSON.parse(@contents[:galleries_widget_json] || 'null', quirks_mode: true)
       end
 
       def galleries_widget_data_for(section_name)
@@ -77,7 +82,7 @@ module Cortex
       end
 
       def accordion_group_widget_data
-        JSON.parse(@webpage[:accordion_group_widget_json] || 'null', quirks_mode: true)
+        JSON.parse(@contents[:accordion_group_widget_json] || 'null', quirks_mode: true)
       end
 
       def accordion_group_widget_data_for(section_name)
@@ -85,11 +90,11 @@ module Cortex
       end
 
       def charts_widget_data
-        JSON.parse(@webpage[:charts_widget_json] || 'null', quirks_mode: true)
+        JSON.parse(@contents[:charts_widget_json] || 'null', quirks_mode: true)
       end
 
       def buy_box_widget_data
-        JSON.parse(@webpage[:buy_box_widget_json] || 'null', quirks_mode: true)
+        JSON.parse(@contents[:buy_box_widget_json] || 'null', quirks_mode: true)
       end
 
       def charts_widget_data_for(section_name)
@@ -97,11 +102,11 @@ module Cortex
       end
 
       def product_data
-        JSON.parse(@webpage[:product_data_json] || 'null', quirks_mode: true)
+        JSON.parse(@contents[:product_data_json] || 'null', quirks_mode: true)
       end
 
       def snippets
-        @webpage[:snippets]
+        @contents[:snippets]
       end
     end
   end
