@@ -52,19 +52,28 @@ module Cortex
         @webpage[:noimageindex]
       end
 
-      def dynamic_yield
-        {
-          sku: @webpage[:dynamic_yield_sku],
-          category: @webpage[:dynamic_yield_category]
-        }
-      end
-
       def tables_widget_data
         JSON.parse(@webpage[:tables_widget_json] || 'null', quirks_mode: true)
       end
 
       def tables_widget_data_for(section_name)
         tables_widget_data&.[](section_name) || []
+      end
+
+      def carousels_widget_data
+        JSON.parse(@webpage[:carousels_widget_json] || 'null', quirks_mode: true)
+      end
+
+      def carousels_widget_data_for(section_name)
+        carousels_widget_data&.[](section_name)
+      end
+
+      def galleries_widget_data
+        JSON.parse(@webpage[:galleries_widget_json] || 'null', quirks_mode: true)
+      end
+
+      def galleries_widget_data_for(section_name)
+        galleries_widget_data&.[](section_name)
       end
 
       def accordion_group_widget_data
@@ -74,13 +83,21 @@ module Cortex
       def accordion_group_widget_data_for(section_name)
         accordion_group_widget_data&.[](section_name) || []
       end
-        
+
       def charts_widget_data
         JSON.parse(@webpage[:charts_widget_json] || 'null', quirks_mode: true)
       end
 
+      def buy_box_widget_data
+        JSON.parse(@webpage[:buy_box_widget_json] || 'null', quirks_mode: true)
+      end
+
       def charts_widget_data_for(section_name)
         charts_widget_data&.[](section_name) || {}
+      end
+
+      def product_data
+        JSON.parse(@webpage[:product_data_json] || 'null', quirks_mode: true)
       end
 
       def snippets
