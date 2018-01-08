@@ -56,7 +56,7 @@ module Cortex
       def noimageindex
         @contents[:noimageindex]
       end
-      
+
       def tables_widget_data
         JSON.parse(@contents[:tables_widget_json] || 'null', quirks_mode: true)
       end
@@ -102,7 +102,7 @@ module Cortex
       end
 
       def product_data
-        JSON.parse(@contents[:product_data_json] || 'null', quirks_mode: true)
+        @product_data ||= JSON.parse(@contents[:product_data_json] || 'null', quirks_mode: true)
       end
 
       def snippets
