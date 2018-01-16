@@ -105,6 +105,10 @@ module Cortex
         @product_data ||= JSON.parse(@contents[:product_data_json] || 'null', quirks_mode: true)
       end
 
+      def form_configs
+        @form_configs ||= JSON.parse(@contents[:form_configs_json] || 'null', quirks_mode: true)
+      end
+
       def snippets
         @contents[:snippets]
       end
