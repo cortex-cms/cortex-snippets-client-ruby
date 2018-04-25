@@ -81,6 +81,22 @@ module Cortex
         galleries_widget_data&.[](section_name)
       end
 
+      def slider_widget_data
+        JSON.parse(@contents[:slider_widget_json] || 'null', quirks_mode: true)
+      end
+
+      def slider_widget_data_for(section_name)
+        slider_widget_data&.[](section_name)
+      end
+
+      def card_group_widget_data
+        JSON.parse(@contents[:card_group_widget_json] || 'null', quirks_mode: true)
+      end
+
+      def card_group_widget_data_for(section_name)
+        card_group_widget_data&.[](section_name)
+      end
+
       def accordion_group_widget_data
         JSON.parse(@contents[:accordion_group_widget_json] || 'null', quirks_mode: true)
       end
@@ -103,6 +119,10 @@ module Cortex
 
       def product_data
         @product_data ||= JSON.parse(@contents[:product_data_json] || 'null', quirks_mode: true)
+      end
+
+      def form_configs
+        @form_configs ||= JSON.parse(@contents[:form_configs_json] || 'null', quirks_mode: true)
       end
 
       def snippets
