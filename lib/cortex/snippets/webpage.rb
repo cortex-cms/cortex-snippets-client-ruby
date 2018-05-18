@@ -89,6 +89,14 @@ module Cortex
         slider_widget_data&.[](section_name)
       end
 
+      def leaders_widget_data
+        JSON.parse(@contents[:leaders_widget_json] || 'null', quirks_mode: true)
+      end
+
+      def leaders_widget_data_for(section_name)
+        leaders_widget_data&.[](section_name)
+      end
+
       def card_group_widget_data
         JSON.parse(@contents[:card_group_widget_json] || 'null', quirks_mode: true)
       end
