@@ -30,6 +30,7 @@ module Cortex
           robot_information << index_option if @contents[index_option]
         end
 
+        robot_information = index_options unless Rails.env.production? || Rails.env.failover?
         robot_information
       end
 
