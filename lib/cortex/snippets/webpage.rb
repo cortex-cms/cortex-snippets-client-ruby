@@ -82,6 +82,14 @@ module Cortex
         galleries_widget_data&.[](section_name)
       end
 
+      def product_information_widget_data
+        JSON.parse(@contents[:product_information_widget_json] || 'null', quirks_mode: true)
+      end
+
+      def product_information_widget_data_for(section_name)
+        product_information_widget_data&.[](section_name)
+      end
+
       def slider_widget_data
         JSON.parse(@contents[:slider_widget_json] || 'null', quirks_mode: true)
       end
